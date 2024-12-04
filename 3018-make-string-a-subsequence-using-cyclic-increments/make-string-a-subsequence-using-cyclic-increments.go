@@ -4,9 +4,6 @@ func canMakeSubsequence(str1 string, str2 string) bool {
 
     var start int
 
-    fmt.Println(bytes1)
-    fmt.Println(bytes2)
-
     for _, v := range bytes2 {
         ok := false
         for start < len(bytes1) {
