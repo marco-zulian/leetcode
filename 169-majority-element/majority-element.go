@@ -4,11 +4,8 @@ func majorityElement(nums []int) int {
 
     for _, num := range nums {
         counts[num]++
-    }
-
-    for k,v := range counts {
-        if v > majority {
-            return k
+        if counts[num] > majority {
+            return num
         }
     }
 
