@@ -14,6 +14,8 @@ func (this *RecentCounter) Ping(t int) int {
     for _, v := range this.times {
         if v < t - 3000 {
             removed++
+        } else {
+            break
         }
     }
 
