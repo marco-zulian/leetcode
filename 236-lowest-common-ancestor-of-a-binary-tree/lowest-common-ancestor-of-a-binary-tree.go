@@ -12,7 +12,6 @@ import (
  * }
  */
  func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-    fmt.Println(p.Val, q.Val)
     _, desc := traverse(root, p, q)
     return desc
 }
