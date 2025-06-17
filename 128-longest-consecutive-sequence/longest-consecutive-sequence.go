@@ -1,23 +1,31 @@
 func longestConsecutive(nums []int) int {
-    if len(nums) <= 1 {
-        return len(nums)
-    }
+    if len(nums) <= 1 { return len(nums) }
+    
+    set := map[int]bool{}
 
-    slices.Sort(nums)
+    for _, num := range nums {
+        set[num] = true
+    }
 
     max := 0
     curr := 1
-    for i, num := range nums[1:] {
-        if num == nums[i] + 1 {
-            curr++
-        } else if num == nums[i] { 
-            continue
-        } else {
-            if curr > max {
-                max = curr
+    for num := range set {
+        if _, ok := set[num-1]; ok { continue }
+
+        val := num
+        for {
+            if _, ok := set[val + 1]; ok {
+                curr++
+                val++
+            } else {
+                if curr > max {
+                    max = curr
+                }
+                curr = 1
+                break
             }
-            curr = 1
         }
+
     }
 
     if curr > max {
