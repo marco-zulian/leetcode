@@ -1,4 +1,7 @@
 func search(nums []int, target int) int {
+    if target == nums[0] { return 0 }
+    if len(nums) == 1 { return - 1 }
+
     var cut int
     i, j := 0, len(nums) - 1
 
@@ -6,10 +9,10 @@ func search(nums []int, target int) int {
         k := (i + j) / 2
 
         if k == 0 {
-            if len(nums) == 1 || nums[0] < nums[1] {
-                cut = 0
-            } else {
-                cut = 1
+            if nums[0] < nums[1] { 
+                cut = 0 
+            } else { 
+                cut = 1 
             }
             break
         }
@@ -24,9 +27,7 @@ func search(nums []int, target int) int {
         }
     }
 
-    if target == nums[0] {
-        return 0
-    } else if target < nums[0] || cut == 0 {
+    if target < nums[0] || cut == 0 {
         i, j = cut, len(nums) - 1
     } else {
         i, j = 0, cut-1
