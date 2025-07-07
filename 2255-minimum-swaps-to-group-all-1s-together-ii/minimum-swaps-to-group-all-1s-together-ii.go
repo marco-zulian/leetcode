@@ -7,6 +7,7 @@ func minSwaps(nums []int) int {
         }
     }
 
+    // Process starting window
     arr := nums[0:total]
     for _, v := range arr {
         if v == 1 {
@@ -16,14 +17,17 @@ func minSwaps(nums []int) int {
     maxGrouped = currGrouped
 
     for i := range nums {
-        if nums[i] == 1 {
-            currGrouped--
-        }
-
+        // Add
         if nums[(i+total) % len(nums)] == 1 {
             currGrouped++
         }
         
+        // Remove
+        if nums[i] == 1 {
+            currGrouped--
+        }
+
+        // Process new window
         if currGrouped > maxGrouped {
             maxGrouped = currGrouped
         }
