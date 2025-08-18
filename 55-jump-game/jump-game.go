@@ -8,7 +8,10 @@ func canJump(nums []int) bool {
         if canReach, ok := memo[from]; ok { return canReach }
         
         for i := 1; i <= nums[from]; i++ {
-            if canReachEnd(from + i, nums) { return true }
+            if canReachEnd(from + i, nums) { 
+                memo[from] = true
+                return true
+            }
         }
 
         memo[from] = false
