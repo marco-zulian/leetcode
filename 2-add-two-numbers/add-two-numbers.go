@@ -28,18 +28,10 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
         i.Next = j
     }
     
-    if i.Next != nil {
+    for i.Next != nil {
         i = i.Next
 
-        for i.Next != nil {
-            val := (i.Val + carry) % 10
-            carry = (i.Val + carry) / 10
-
-            i.Val = val
-            i = i.Next
-        }
-
-        val = (i.Val + carry) % 10
+        val := (i.Val + carry) % 10
         carry = (i.Val + carry) / 10
 
         i.Val = val
