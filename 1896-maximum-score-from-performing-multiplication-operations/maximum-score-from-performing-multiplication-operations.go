@@ -1,21 +1,21 @@
 func maximumScore(nums []int, multipliers []int) int {
     memo := map[string]int{}
-    var maxHelper func([]int, []int, int, int) int
+    var maxHelper func(int, int, int) int
     
-    maxHelper = func(nums []int, multipliers []int, start int, end int) int {
-        if len(multipliers) == 0 { return 0 }
-        key := strconv.Itoa(len(multipliers)) + "==" + strconv.Itoa(start) + "==" + strconv.Itoa(end)
+    maxHelper = func(op int, start int, end int) int {
+        if len(multipliers) == op { return 0 }
+        key := strconv.Itoa(op) + "==" + strconv.Itoa(start) + "==" + strconv.Itoa(end)
         if v, ok := memo[key]; ok { return v }
         
         memo[key] = max(
-            multipliers[0] * nums[0] + maxHelper(nums[1:], multipliers[1:], start+1, end),
-            multipliers[0] * nums[len(nums) - 1] + maxHelper(nums[:len(nums)-1], multipliers[1:], start, end+1),
+            multipliers[op] * nums[start] + maxHelper(op+1, start+1, end),
+            multipliers[op] * nums[end] + maxHelper(op+1, start, end-1),
         )
 
         return memo[key] 
     }
     
-    return maxHelper(nums, multipliers, 0, 0)
+    return maxHelper(0, 0, len(nums)-1)
 }
 
 func max(a int, b int) int {
