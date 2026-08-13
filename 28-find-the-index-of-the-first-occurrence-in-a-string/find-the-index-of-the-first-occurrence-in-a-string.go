@@ -1,15 +1,23 @@
 func strStr(haystack string, needle string) int {
-    for i := range(haystack) {
-        if len(haystack) - i < len(needle) { break }
-
-        idx := i
-        for haystack[idx] == needle[idx-i] {
-            idx++
-            if (idx - i) == len(needle) {
+    needle_rn := []rune(needle)
+    haystack_rn := []rune(haystack)
+    for i, rn_h := range haystack {
+        if i + len(needle) > len(haystack) {
+            break
+        }
+        if rn_h == needle_rn[0] {
+            k := i
+            for _, rn_n := range needle {
+                if haystack_rn[k] == rn_n {
+                    k++
+                    continue
+                }
+                break
+            }
+            if (k-i) == len(needle) {
                 return i
             }
         }
     }
-
     return -1
 }
